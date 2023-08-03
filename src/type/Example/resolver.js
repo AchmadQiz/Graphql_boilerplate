@@ -26,7 +26,7 @@ var coursesData = [
 ]
 
 module.exports.getExample = function(args,context) {
-    console.log(context)
+    console.log(context.body.query)
     var id = args.id;
     return coursesData.filter(course => {
         return course.id == id;

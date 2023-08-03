@@ -21,32 +21,4 @@ module.exports = {
         }
         logInfo(dateString + " : " + sessionId + " : " + args)
     },
-    getVariableSelection: (queryJson,queryName)=>{
-        const variableMapping = []
-        const querySelection = queryJson.definitions.find(el=>el.operation === 'query')
-        if(!querySelection) {
-            return variableMapping
-        }
-        const variableDefinitions = querySelection.selectionSet.selections.filter(el=>el.name.value === queryName)
-        if(variableDefinitions.length == 0){
-            return variableMapping
-        }
-        variableDefinitions.forEach(item=>{
-            item.arguments.forEach(el=>{
-                const keyName = el.name.value
-                let value
-                if(el.value.kind === 'Variable'){
-                    value = el.value.name.value
-                } else {
-                    value = el.value.value
-                }
-                variableMapping.push({
-                    value: value,
-                    name: keyName,
-                    kind: el.value.kind
-                })
-            })
-        })
-        return variableMapping
-    }
 }

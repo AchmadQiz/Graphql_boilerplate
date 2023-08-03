@@ -8,15 +8,16 @@ const getDirectories = source =>
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name)
 
-
+// merged resolver
 getDirectories(normalizedPath).forEach((file)=>{
     const lambdaPath = normalizedPath+"/"+file;
-    if(fs.existsSync(lambdaPath+"/index.js")){
-        const lambda = require("./"+file+"/index.js");
+    if(fs.existsSync(lambdaPath+"/resolver.js")){
+        const lambda = require("./"+file+"/resolver.js");
         Object.assign(lambdas, lambda)
     }
 });
 
+// merged schemas
 let schemas = [];
 const gql = glob.sync(__dirname + '/**/*.gql', {})
 

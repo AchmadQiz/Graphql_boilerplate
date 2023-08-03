@@ -11,7 +11,7 @@ InitSetup().then(() => {
     const app = express();
     const port = process.env.PORT || 4000;
 
-    const lambdas = require('./src/lambdas');
+    const lambdas = require('./src/schemas');
 
     app.use(bodyParser.json({limit: '5gb'}));
     app.use(bodyParser.urlencoded({ extended: true }));
